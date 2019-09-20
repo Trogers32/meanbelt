@@ -1,0 +1,27 @@
+
+<div class="row">
+    <h4 class="col-8">Details about {{currPet.name}}</h4>
+    <button [routerLink]="['/Home']">Home</button>
+</div>
+<div>
+    <div class="row">
+        <span class="col-3">Pet Type:</span>
+        {{currPet.petType}}
+    </div>
+    <div class="row">
+        <span class="col-3">Description:</span>
+        {{currPet.description}}
+    </div>
+    <div class="row">
+        <span class="col-3">Skills:</span>
+        <div class="col">
+            <p *ngFor="let t of currPet.skills">{{t}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <span class="col-3">Likes:</span>
+        {{currPet.likes}}
+    </div>
+    <button (click)="upVote(currPet._id)" class="btn-sm btn-primary mr-2 mt-2" [disabled]="liked">{{like}}</button>
+    <button (click)="removePet(currPet._id)" class="btn-sm btn-primary mr-2">Adopt this pet!</button>
+</div>

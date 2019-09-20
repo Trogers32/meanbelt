@@ -1,0 +1,65 @@
+<div>
+    <div class="row">
+        <h4 class="col-8">Know of a pet needing a home?</h4>
+        <button [routerLink]="['/Home']">Home</button>
+    </div>
+    
+    <form (submit)="getIndividualPet(newPet.name)">
+        <label for=""class=" ">Pet Name:</label>
+        <div class="row m-1">
+            <input type="text" name="newPet.name" [(ngModel)]="newPet.name" minlength="3" required #name="ngModel" />
+        </div>
+        <label for=""class=" ">Pet type:</label>
+        <div class="row m-1">
+            <input type="text" name="newPet.petType" [(ngModel)]="newPet.petType" minlength="3" required #petType="ngModel" />
+        </div>
+        <label for=""class=" ">Pet description:</label>
+        <div class="row m-1">
+            <input type="text" name="newPet.description" [(ngModel)]="newPet.description" minlength="3" required #description="ngModel" />
+        </div>
+        <div class="row m-1">
+            <label for=""class=" ">Skills:</label>
+        </div>
+        <label for=""class="ml-4 ">Skill 1:</label>
+        <div class="row ml-4">
+            <input type="text" name="newPet.skills[0]" [(ngModel)]="newPet.skills[0]"/>
+        </div>
+        <label for=""class="ml-4 ">Skill 2:</label>
+        <div class="row ml-4">
+            <input type="text" name="newPet.skills[1]" [(ngModel)]="newPet.skills[1]"/>
+        </div>
+        <label for=""class="ml-4 ">Skill 3:</label>
+        <div class="row ml-4">
+            <input type="text" name="newPet.skills[2]" [(ngModel)]="newPet.skills[2]"/>
+        </div>
+        <div class="m-2">
+            <input type="submit" [disabled]="!name.valid || !petType.valid || !description.valid" value="Submit Pet" class="btn btn-primary"/>
+            <input type="button" [routerLink]="['/Home']" value="Cancel" class="btn btn-primary ml-2"/>
+        </div>
+        <div *ngIf="name.errors || petType.errors || description.errors" class="text-danger">
+            <div *ngIf="name.errors && name.errors.required">
+                Name is required.
+            </div>
+            <div *ngIf="name.errors && name.errors.minlength">
+                Pet name must be at least 3 characters long.
+            </div>
+            <div *ngIf="petType.errors && petType.errors.required">
+                Pet type is required.
+            </div>
+            <div *ngIf="petType.errors && petType.errors.minlength">
+                Pet type must be at least 3 characters long.
+            </div>
+            <div *ngIf="description.errors && description.errors.required">
+                Pet description is required.
+            </div>
+            <div *ngIf="description.errors && description.errors.minlength">
+                Pet description must be at least 3 characters long.
+            </div>
+        </div>
+    </form>
+    <div *ngIf="errors">
+        <div *ngFor="let err of errors" class="text-danger">
+            {{err}}
+        </div>
+    </div>
+</div>

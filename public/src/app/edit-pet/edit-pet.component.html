@@ -1,0 +1,68 @@
+<div>
+        <div class="row">
+            <h4 class="col-8">Edit this pet</h4>
+            <button [routerLink]="['/Home']">Home</button>
+        </div>
+        
+        <form (submit)="getIndividualPet(editPet.name)">
+            <label for=""class=" ">Pet Name:</label>
+            <div class="row m-1">
+                <input type="text" name="editPet.name" [(ngModel)]="editPet.name" minlength="3" required #name="ngModel" [value]="editPet.name"/>
+            </div>
+            <label for=""class=" ">Pet type:</label>
+            <div class="row m-1">
+                <input type="text" name="editPet.petType" [(ngModel)]="editPet.petType" minlength="3" required #petType="ngModel" [value]="editPet.petType" />
+            </div>
+            <label for=""class=" ">Pet description:</label>
+            <div class="row m-1">
+                <input type="text" name="editPet.description" [(ngModel)]="editPet.description" minlength="3" required #description="ngModel" [value]="editPet.description" />
+            </div>
+            <div class="row m-1">
+                <label for=""class=" ">Skills:</label>
+            </div>
+            <label for=""class="ml-4 ">Skill 1:</label>
+            <div class="row ml-4">
+                <input type="text" name="editPet.skills[0]" [(ngModel)]="editPet.skills[0]" [value]="editPet.skills[0]"/>
+            </div>
+            <label for=""class="ml-4 ">Skill 2:</label>
+            <div class="row ml-4">
+                <input type="text" name="editPet.skills[1]" [(ngModel)]="editPet.skills[1]" [value]="editPet.skills[1]"/>
+            </div>
+            <label for=""class="ml-4 ">Skill 3:</label>
+            <div class="row ml-4">
+                <input type="text" name="editPet.skills[2]" [(ngModel)]="editPet.skills[2]" [value]="editPet.skills[2]"/>
+            </div>
+            <div class="m-2">
+                <input type="submit" [disabled]="!name.valid || !petType.valid || !description.valid" value="Submit Pet Edit" class="btn btn-primary"/>
+                <input type="button" [routerLink]="['/Home']" value="Cancel" class="btn btn-primary ml-2"/>
+            </div>
+            <div *ngIf="name.errors || petType.errors || description.errors" class="text-danger">
+                <div *ngIf="name.errors && name.errors.required">
+                    Name is required.
+                </div>
+                <div *ngIf="name.errors && name.errors.minlength">
+                    Pet name must be at least 3 characters long.
+                </div>
+                <div *ngIf="petType.errors && petType.errors.required">
+                    Pet type is required.
+                </div>
+                <div *ngIf="petType.errors && petType.errors.minlength">
+                    Pet type must be at least 3 characters long.
+                </div>
+                <div *ngIf="description.errors && description.errors.required">
+                    Pet description is required.
+                </div>
+                <div *ngIf="description.errors && description.errors.minlength">
+                    Pet description must be at least 3 characters long.
+                </div>
+            </div>
+        </form>
+        <div *ngIf="errors">
+            <div *ngFor="let err of errors" class="text-danger">
+                {{err}}
+            </div>
+        </div>
+        <div *ngIf="errorsDupe" class="text-danger">
+            {{errorsDupe}}
+        </div>
+    </div>
